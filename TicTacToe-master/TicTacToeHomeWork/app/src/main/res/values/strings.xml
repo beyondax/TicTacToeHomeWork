@@ -6,4 +6,7 @@
     <string name="active_player_label">Current player:</string>
     <string name="exit_dialog_no">NO</string>
     <string name="exit_dialog_yes">YES</string>
+    <string name="reset">Reset</string>
+    <string name="exit">Exit</string>
+    <string name="exit_label">Do you want to exit?</string>
 </resources>

@@ -2,8 +2,6 @@ package com.example.tictactoehomework.view;
 
 import android.app.Dialog;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -18,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+
 public class TicTacActivity extends AppCompatActivity implements TicTacView {
 
     private static String TAG = TicTacActivity.class.getName();
@@ -28,8 +27,8 @@ public class TicTacActivity extends AppCompatActivity implements TicTacView {
     TextView activePlayer;
     TicTacPresenter presenter = new TicTacPresenter(this);
     private List<List<ImageView>> imageViewsList = new ArrayList<>();
-    private View winnerPlayerViewGroup;
-    private TextView winnerPlayerLabel;
+
+    TextView winnerTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +37,8 @@ public class TicTacActivity extends AppCompatActivity implements TicTacView {
 
         playerOneScore = findViewById(R.id.player_one_score);
         playerTwoScore = findViewById(R.id.player_two_score);
+        activePlayer = findViewById(R.id.active_player);
+        winnerTextView = findViewById(R.id.winner);
 
         cell_00 = findViewById(R.id.table_00);
         cell_01 = findViewById(R.id.table_01);
@@ -60,7 +61,6 @@ public class TicTacActivity extends AppCompatActivity implements TicTacView {
                 imageViewsList.get(i).get(j).setOnClickListener(v -> {
                     try {
                         presenter.onImagePressed(finalI, finalJ);
-                        Log.i(TAG, "Click Row: [" + finalI + "," + finalJ + "]");
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -91,8 +91,22 @@ public class TicTacActivity extends AppCompatActivity implements TicTacView {
 
     @Override
     public void showWinner(String winningPlayerDisplayLabel) {
+        final Dialog dialog = new Dialog(TicTacActivity.this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_winner_reset);
+        dialog.setCancelable(false);
+        dialog.show();
+        Button exit = dialog.findViewById(R.id.exit_button);
+        final Button reset = dialog.findViewById(R.id.reset_button);
+//        winnerTextView.setText("Winner is: " + winningPlayerDisplayLabel);
+        exit.setOnClickListener(view -> finish());
+        reset.setOnClickListener(view -> {
+            presenter.onResetSelected();
+            dialog.dismiss();
+        });
 
     }
+
 
     @Override
     public void clearWinnerDisplay() {
@@ -101,7 +115,11 @@ public class TicTacActivity extends AppCompatActivity implements TicTacView {
 
     @Override
     public void clearImages() {
-
+        for (int i = 0; i < imageViewsList.size(); i++) {
+            for (int j = 0; j < imageViewsList.size(); j++) {
+                imageViewsList.get(i).get(j).setImageResource(0);
+            }
+        }
     }
 
     @Override
@@ -114,16 +132,13 @@ public class TicTacActivity extends AppCompatActivity implements TicTacView {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_layout_exit);
         dialog.setCancelable(false);
-
         dialog.show();
-
         Button exit = dialog.findViewById(R.id.yes_button);
         final Button dismiss = dialog.findViewById(R.id.no_button);
-
         exit.setOnClickListener(view -> finish());
-
         dismiss.setOnClickListener(view -> dialog.dismiss());
     }
+
 
     @Override
     public void onBackPressed() {
