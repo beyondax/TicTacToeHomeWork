@@ -5,9 +5,9 @@ public interface TicTacView {
 
     void showWinner(String winningPlayerDisplayLabel);
 
-    void clearWinnerDisplay();
-
     void clearImages();
+
+    void currentPlayer();
 
     void setImage(int row, int col, int drawableRes);
 

@@ -39,6 +39,7 @@ public class TicTacPresenter implements Presenter {
         Player playerThatMoved = board.mark(row, col);
         if (playerThatMoved != null) {
             view.setImage(row, col, playerThatMoved.getDrawable());
+
             if (board.getWinner() != null) {
                 view.showWinner(playerThatMoved.toString());
             }
@@ -46,8 +47,11 @@ public class TicTacPresenter implements Presenter {
     }
 
     public void onResetSelected() {
-        view.clearWinnerDisplay();
         view.clearImages();
         board.restart();
+    }
+
+    public String getCurrentPlayer() {
+        return board.getCurrentTurn().toString();
     }
 }

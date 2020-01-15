@@ -22,12 +22,11 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:fontFamily="casual"
+            android:fontFamily="@font/roboto_medium"
             android:gravity="center"
             android:text="@string/player_1"
             android:textColor="#F44336"
-            android:textSize="22sp"
-            android:textStyle="bold" />
+            android:textSize="22sp" />
 
         <View
             android:layout_width="@dimen/green_line_thickness"
@@ -40,13 +39,12 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:fontFamily="casual"
+            android:fontFamily="@font/roboto_medium"
             android:gravity="center"
             android:text="@string/player_2"
             android:textAlignment="center"
             android:textColor="#3F51B5"
-            android:textSize="22sp"
-            android:textStyle="bold" />
+            android:textSize="22sp" />
 
     </LinearLayout>
 
@@ -62,9 +60,10 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:fontFamily="casual"
+            android:fontFamily="@font/roboto_thin"
             android:gravity="center"
             android:text="@string/starting_score"
+            android:textColor="@android:color/holo_green_dark"
             android:textSize="55sp" />
 
 
@@ -79,9 +78,10 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:fontFamily="casual"
+            android:fontFamily="@font/roboto_thin"
             android:gravity="center"
             android:text="@string/starting_score"
+            android:textColor="@android:color/holo_green_dark"
             android:textSize="55sp" />
     </LinearLayout>
 
@@ -216,6 +216,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="@font/roboto_medium"
+            android:shadowColor="#FFFFFF"
             android:text="@string/active_player_label"
             android:textColor="@android:color/holo_green_dark"
             android:textSize="25sp" />
@@ -231,6 +232,17 @@
             android:textColor="@android:color/holo_green_dark"
             android:textSize="25sp"
             tools:text="X" />
+
+        <Button
+            android:id="@+id/reset_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="8dp"
+            android:background="@drawable/round"
+            android:shadowColor="#FFFFFF"
+            android:text="@string/reset_game_button"
+            android:textColor="@android:color/white" />
 
 
     </LinearLayout>

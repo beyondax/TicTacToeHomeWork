@@ -9,4 +9,5 @@
     <string name="reset">Reset</string>
     <string name="exit">Exit</string>
     <string name="exit_label">Do you want to exit?</string>
+    <string name="reset_game_button">Reset</string>
 </resources>

@@ -20,7 +20,7 @@
             android:layout_height="50dp"
             android:gravity="center"
             android:padding="4dp"
-            android:textColor="@android:color/holo_red_dark"
+            android:textColor="@android:color/black"
             android:textSize="22sp"
             tools:text="Winner is X!" />
 

@@ -22,23 +22,28 @@ public class TicTacActivity extends AppCompatActivity implements TicTacView {
     private static String TAG = TicTacActivity.class.getName();
 
     ImageView cell_00, cell_01, cell_02, cell_10, cell_11, cell_12, cell_20, cell_21, cell_22;
-    TextView playerOneScore;
-    TextView playerTwoScore;
-    TextView activePlayer;
+    private TextView mPlayerOneScore;
+    private TextView mPlayerTwoScore;
+    private TextView mActivePlayer;
+    private Button mResetButton;
+    private int scoreOne = 0;
+    private int scoreTwo = 0;
     TicTacPresenter presenter = new TicTacPresenter(this);
     private List<List<ImageView>> imageViewsList = new ArrayList<>();
-
-    TextView winnerTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        playerOneScore = findViewById(R.id.player_one_score);
-        playerTwoScore = findViewById(R.id.player_two_score);
-        activePlayer = findViewById(R.id.active_player);
-        winnerTextView = findViewById(R.id.winner);
+        mPlayerOneScore = findViewById(R.id.player_one_score);
+        mPlayerTwoScore = findViewById(R.id.player_two_score);
+        mActivePlayer = findViewById(R.id.active_player);
+
+        mResetButton = findViewById(R.id.reset_main);
+
+        mPlayerOneScore.setText(String.valueOf(scoreOne));
+        mPlayerTwoScore.setText(String.valueOf(scoreOne));
 
         cell_00 = findViewById(R.id.table_00);
         cell_01 = findViewById(R.id.table_01);
@@ -54,6 +59,7 @@ public class TicTacActivity extends AppCompatActivity implements TicTacView {
         imageViewsList.add(Arrays.asList(cell_10, cell_11, cell_12));
         imageViewsList.add(Arrays.asList(cell_20, cell_21, cell_22));
 
+
         for (int i = 0; i < imageViewsList.size(); i++) {
             int finalI = i;
             for (int j = 0; j < imageViewsList.size(); j++) {
@@ -68,7 +74,11 @@ public class TicTacActivity extends AppCompatActivity implements TicTacView {
             }
         }
         presenter.onCreate();
+        currentPlayer();
+
+        mResetButton.setOnClickListener(v -> presenter.onResetSelected());
     }
+
 
     @Override
     protected void onPause() {
@@ -94,22 +104,34 @@ public class TicTacActivity extends AppCompatActivity implements TicTacView {
         final Dialog dialog = new Dialog(TicTacActivity.this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_winner_reset);
+        TextView titleText = dialog.findViewById(R.id.winner);
         dialog.setCancelable(false);
         dialog.show();
+
+        titleText.setText(winningPlayerDisplayLabel + " WINS!");
+
+        switch (winningPlayerDisplayLabel) {
+            case "X":
+                scoreOne++;
+                break;
+            case "O":
+                scoreTwo++;
+                break;
+            default:
+                break;
+        }
+
+        mPlayerOneScore.setText(String.valueOf(scoreOne));
+        mPlayerTwoScore.setText(String.valueOf(scoreTwo));
+
         Button exit = dialog.findViewById(R.id.exit_button);
         final Button reset = dialog.findViewById(R.id.reset_button);
-//        winnerTextView.setText("Winner is: " + winningPlayerDisplayLabel);
+
         exit.setOnClickListener(view -> finish());
         reset.setOnClickListener(view -> {
-            presenter.onResetSelected();
             dialog.dismiss();
+            presenter.onResetSelected();
         });
-
-    }
-
-
-    @Override
-    public void clearWinnerDisplay() {
 
     }
 
@@ -123,8 +145,14 @@ public class TicTacActivity extends AppCompatActivity implements TicTacView {
     }
 
     @Override
+    public void currentPlayer() {
+        mActivePlayer.setText(presenter.getCurrentPlayer());
+    }
+
+    @Override
     public void setImage(int row, int col, int drawableRes) {
         imageViewsList.get(row).get(col).setImageResource(drawableRes);
+        currentPlayer();
     }
 
     private void showExitDialog() {
@@ -133,12 +161,13 @@ public class TicTacActivity extends AppCompatActivity implements TicTacView {
         dialog.setContentView(R.layout.dialog_layout_exit);
         dialog.setCancelable(false);
         dialog.show();
+
         Button exit = dialog.findViewById(R.id.yes_button);
         final Button dismiss = dialog.findViewById(R.id.no_button);
+
         exit.setOnClickListener(view -> finish());
         dismiss.setOnClickListener(view -> dialog.dismiss());
     }
-
 
     @Override
     public void onBackPressed() {

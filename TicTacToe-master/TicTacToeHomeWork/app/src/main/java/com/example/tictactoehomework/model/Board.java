@@ -1,7 +1,7 @@
 package com.example.tictactoehomework.model;
 
-import static com.example.tictactoehomework.model.Player.CIRCLE;
-import static com.example.tictactoehomework.model.Player.CROSS;
+import static com.example.tictactoehomework.model.Player.O;
+import static com.example.tictactoehomework.model.Player.X;
 
 public class Board {
 
@@ -11,16 +11,20 @@ public class Board {
     private GameState state;
     private Player currentTurn;
 
+    public Player getCurrentTurn() {
+        return currentTurn;
+    }
+
     public Board() {
         restart();
     }
 
-    ;
+
 
     public void restart() {
         clearCells();
         winner = null;
-        currentTurn = CROSS;
+        currentTurn = X;
         state = GameState.IN_PROGRESS;
     }
 
@@ -34,9 +38,8 @@ public class Board {
             playerThatMoved = currentTurn;
 
             if (isWinningMoveByPlayer(currentTurn, row, col)) {
-                state = GameState.FINISHED;
+                state = GameState.FINISHED_WITH_WINNER;
                 winner = currentTurn;
-
             } else {
                 // flip the current turn and continue
                 flipCurrentTurn();
@@ -45,6 +48,7 @@ public class Board {
 
         return playerThatMoved;
     }
+
 
     public Player getWinner() {
         return winner;
@@ -59,7 +63,7 @@ public class Board {
     }
 
     private boolean isValid(int row, int col) {
-        if (state == GameState.FINISHED) {
+        if (state == GameState.FINISHED_WITH_WINNER) {
             return false;
         } else if (isOutOfBounds(row) || isOutOfBounds(col)) {
             return false;
@@ -96,10 +100,11 @@ public class Board {
                 && cells[2][0].getPlayer() == player);
     }
 
+
     private void flipCurrentTurn() {
-        currentTurn = currentTurn == CROSS ? CIRCLE : CROSS;
+        currentTurn = currentTurn == X ? O : X;
     }
 
-    private enum GameState {IN_PROGRESS, FINISHED}
+    private enum GameState {IN_PROGRESS, FINISHED_WITH_WINNER}
 
 }

@@ -6,8 +6,8 @@ import com.example.tictactoehomework.R;
 
 public enum Player {
 
-    CROSS(R.drawable.cross),
-    CIRCLE(R.drawable.circle);
+    X(R.drawable.cross),
+    O(R.drawable.circle);
 
     private final int drawable;
 
