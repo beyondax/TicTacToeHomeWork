@@ -1,6 +1,7 @@
 package com.example.tictactoehomework.view;
 
 import android.app.Dialog;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.Window;
 import android.widget.Button;
@@ -35,6 +36,8 @@ public class TicTacActivity extends AppCompatActivity implements TicTacView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
 
         mPlayerOneScore = findViewById(R.id.player_one_score);
         mPlayerTwoScore = findViewById(R.id.player_two_score);
