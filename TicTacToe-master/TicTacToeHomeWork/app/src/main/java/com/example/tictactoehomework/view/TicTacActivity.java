@@ -73,10 +73,14 @@ public class TicTacActivity extends AppCompatActivity implements TicTacView {
                 });
             }
         }
+
         presenter.onCreate();
         currentPlayer();
 
-        mResetButton.setOnClickListener(v -> presenter.onResetSelected());
+        mResetButton.setOnClickListener(v -> {
+            presenter.onResetSelected();
+            currentPlayer();
+        });
     }
 
 
@@ -153,25 +157,6 @@ public class TicTacActivity extends AppCompatActivity implements TicTacView {
     public void setImage(int row, int col, int drawableRes) {
         imageViewsList.get(row).get(col).setImageResource(drawableRes);
         currentPlayer();
-    }
-
-    private void showExitDialog() {
-        final Dialog dialog = new Dialog(TicTacActivity.this);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.dialog_layout_exit);
-        dialog.setCancelable(false);
-        dialog.show();
-
-        Button exit = dialog.findViewById(R.id.yes_button);
-        final Button dismiss = dialog.findViewById(R.id.no_button);
-
-        exit.setOnClickListener(view -> finish());
-        dismiss.setOnClickListener(view -> dialog.dismiss());
-    }
-
-    @Override
-    public void onBackPressed() {
-        showExitDialog();
     }
 
 }
