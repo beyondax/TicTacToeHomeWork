@@ -17,10 +17,10 @@ public class TicTacToeTests {
 
     /**
      * This test will simulate and verify X is the winner.
-     * <p>
-     * X | X | X
-     * O |   |
-     * | O |
+     *
+     *   X | X | X
+     *   O |   |
+     *     | O |
      */
 
     @Test
@@ -44,10 +44,10 @@ public class TicTacToeTests {
 
     /**
      * This test will simulate and verify X is the winner.
-     * <p>
-     * O |   |
-     * X | X | X
-     * | O |
+     *
+     *    O |   |
+     *    X | X | X
+     *      | O |
      */
 
     @Test
