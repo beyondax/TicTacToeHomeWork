@@ -72,10 +72,10 @@ public class TicTacToeTests {
 
     /**
      * This test will simulate and verify O is the winner.
-     * <p>
-     * O | X | X
-     * | O |
-     * | X | O
+     *
+     *   O | X | X
+     *     | O |
+     *     | X | O
      */
 
     @Test
@@ -103,10 +103,10 @@ public class TicTacToeTests {
 
     /**
      * This test will simulate and verify O is the winner.
-     * <p>
+     *
      * X | O | X
-     * | O | X
-     * | O |
+     *   | O | X
+     *   | O |
      */
 
     @Test
