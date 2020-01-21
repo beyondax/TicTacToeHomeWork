@@ -92,10 +92,10 @@ public class TicTacToePresenterTests {
 
     /**
      * This test will simulate and verify X is the winner.
-     * <p>
-     * |   |
-     * O | O |
-     * X | X | X
+     *
+     *     |   |
+     *   O | O |
+     *   X | X | X
      */
     @Test
     public void test3inRowAcrossBotForX() {
@@ -121,10 +121,10 @@ public class TicTacToePresenterTests {
 
     /**
      * This test will simulate and verify O is the winner.
-     * <p>
+     *
      * O | X | X
-     * | O |
-     * | X | O
+     *   | O |
+     *   | X | O
      */
     @Test
     public void test3inRowDiagonalFromTopLeftToBottomForO() {
