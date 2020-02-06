@@ -7,8 +7,9 @@ public interface TicTacView {
 
     void clearImages();
 
-    void currentPlayer();
+    void showCurrentPlayer(String name);
 
     void setImage(int row, int col, int drawableRes);
+
 
 }

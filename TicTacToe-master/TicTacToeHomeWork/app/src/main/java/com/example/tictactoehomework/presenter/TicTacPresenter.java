@@ -20,20 +20,7 @@ public class TicTacPresenter implements Presenter {
         board = new Board();
     }
 
-    @Override
-    public void onPause() {
 
-    }
-
-    @Override
-    public void onResume() {
-
-    }
-
-    @Override
-    public void onDestroy() {
-
-    }
 
     public void onImagePressed(int row, int col) {
         Player playerThatMoved = board.mark(row, col);
@@ -51,7 +38,7 @@ public class TicTacPresenter implements Presenter {
         board.restart();
     }
 
-    public String getCurrentPlayer() {
-        return board.getCurrentTurn().toString();
+    public void setCurrentPlayer() {
+        view.showCurrentPlayer(board.getCurrentTurn().toString());
     }
 }

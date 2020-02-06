@@ -78,31 +78,12 @@ public class TicTacActivity extends AppCompatActivity implements TicTacView {
         }
 
         presenter.onCreate();
-        currentPlayer();
+        presenter.setCurrentPlayer();
 
         mResetButton.setOnClickListener(v -> {
             presenter.onResetSelected();
-            currentPlayer();
+            presenter.setCurrentPlayer();
         });
-    }
-
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        presenter.onPause();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        presenter.onResume();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        presenter.onDestroy();
     }
 
 
@@ -152,14 +133,14 @@ public class TicTacActivity extends AppCompatActivity implements TicTacView {
     }
 
     @Override
-    public void currentPlayer() {
-        mActivePlayer.setText(presenter.getCurrentPlayer());
+    public void showCurrentPlayer(String name) {
+        mActivePlayer.setText(name);
     }
 
     @Override
     public void setImage(int row, int col, int drawableRes) {
         imageViewsList.get(row).get(col).setImageResource(drawableRes);
-        currentPlayer();
+        presenter.setCurrentPlayer();
     }
 
 }
